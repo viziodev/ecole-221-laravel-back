@@ -19,6 +19,7 @@ class AuthController extends Controller
 
        return  response( $user,Response::HTTP_CREATED); 
     }
+    
     public function login(LoginRequest $request){
         if(Auth::attempt($request->only("email","password"))){
             $user=Auth::user();
@@ -31,4 +32,8 @@ class AuthController extends Controller
           'error'=>"Token invalide"
       ],Response::HTTP_UNAUTHORIZED);
     }
+
+   
+
+
 }
