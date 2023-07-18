@@ -4,15 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cycle extends Model
 {
     use HasFactory;
-
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
     
-    protected $guarded=[];
-    public function niveaux():HasMany{
-        return $this->hasMany(Niveau::class);
-    }
+    protected $fillable = [
+        'libelle'
+    ];
+    protected $guarded = [
+        'id'
+    ];
 }

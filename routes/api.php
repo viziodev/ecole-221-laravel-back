@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\NiveauController;
+use App\Models\Cycle;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,7 @@ Route::middleware('auth:api')->group(function () {
     Route::put("/user/current/password",[UserController::class,"updatePassword"]);
 });
 
-Route::apiResource("cycles",CycleController::class)->except(["update","destroy"]);
-Route::apiResource("niveaux",NiveauController::class)->only(["index","show","store"]);
-
-
+Route::apiResource('cycles',CycleController::class)->except(['destroy', 'update']);
 
 
 

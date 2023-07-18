@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CycleStoreRequest;
 use App\Models\Cycle;
 use Illuminate\Http\Request;
 
@@ -10,22 +11,17 @@ class CycleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->has("join") && $request->join=="niveaux") {
-           return Cycle::with("niveaux")->get(); 
-         }
-
-         return Cycle::all();
-        
+        return Cycle::all();
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CycleStoreRequest $request)
     {
-        //
+        return Cycle::create($request->all());
     }
 
     /**
@@ -33,7 +29,7 @@ class CycleController extends Controller
      */
     public function show(string $id)
     {
-        
+        return Cycle::find($id);
     }
 
     /**
