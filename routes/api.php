@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnneeScolaireController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -28,7 +29,13 @@ Route::middleware('auth:api')->group(function () {
 
 Route::apiResource('cycles',CycleController::class)->except(['destroy', 'update']);
 
-
+Route::prefix('niveau')->group(function () {
+   Route::get("/",[NiveauController::class,"index"]);
+   Route::get("/{niveau}",[NiveauController::class,"show"]);
+  Route::post("/",[NiveauController::class,"store"]); 
+});
+Route::get("/annees/encours",[AnneeScolaireController::class,"anneeEncours"]);
+Route::apiResource("annees",AnneeScolaireController::class)->except(['destroy']);
 
 Route::post("/register",[AuthController::class,"register"]);
 Route::post("/login",[AuthController::class,"login"]);

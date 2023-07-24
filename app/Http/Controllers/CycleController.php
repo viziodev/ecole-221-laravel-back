@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CycleStoreRequest;
+use App\Http\Resources\CycleResource;
 use App\Models\Cycle;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,14 @@ class CycleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has("join") && $request->join=="niveaux"){
+            return CycleResource::collection(Cycle::with($request->join)->get());
+           /*return Cycle::with([$request->join=>function($query){
+                  return $query-> select("id","libelle");
+             }])->get();*/
+        }
         return Cycle::all();
     }
 
